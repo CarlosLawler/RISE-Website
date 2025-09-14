@@ -10,6 +10,19 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Colors */
+  --color-jaguar: #000114;
+  --color-silver: #c0c0c1;
+  --color-gallery: #ededed;
+  --color-portage: #91a9f4;
+  --color-mariner: #1e4cea;
+  --color-biscay: #12325f;
+  --color-wildsand: #f4f4f4;
+
+  /* Fonts */
+  --font-display: var(--font-barlow);
+  --font-body: var(--font-barlow);
 }
 
 @media (prefers-color-scheme: dark) {
