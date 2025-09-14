@@ -45,6 +45,7 @@ export default function ConnectCTA() {
       </div>
 
       {/* Band footer-like section */}
+      {/* TODO: Move to separate footer component */}
       <div className="bg-biscay py-14">
         <div className="mx-auto max-w-6xl px-4 flex items-center gap-4">
           <img src="/logo-mark.svg" alt="" className="h-8 w-auto" />
