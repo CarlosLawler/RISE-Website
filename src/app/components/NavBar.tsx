@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -47,7 +48,7 @@ export default function NavBar() {
             </a>
           ))}
 	--*/}
-	<a
+	 <a
 	  href="https://docs.google.com/forms/d/e/1FAIpQLSdxI1RRwUXxrjCYMZbyBOI1eoLQBL_m90qR22awXHpeDsihQQ/viewform?usp=dialog"
 	  target="_blank"
 	  rel="noopener noreferrer" 

@@ -209,14 +209,14 @@ export default function WhatIsRise() {
 
               {/* Actions */}
               <div className="mt-6 flex flex-wrap items-center gap-3">
-                <Link
+	         <a
 		  href="https://docs.google.com/forms/d/e/1FAIpQLSdxI1RRwUXxrjCYMZbyBOI1eoLQBL_m90qR22awXHpeDsihQQ/viewform?usp=dialog"
 		  target="_blank"
 		  rel="noopener noreferrer"
                   className="rounded-xl bg-jaguar px-4 py-2 text-white transition-colors hover:bg-biscay"
                 >
                   Get Connected
-                </Link>
+                </a>
                 <button
                   className="rounded-xl border border-jaguar/20 bg-white/60 px-4 py-2 text-jaguar hover:bg-white/80 transition"
                   onClick={() => setOpen(false)}
