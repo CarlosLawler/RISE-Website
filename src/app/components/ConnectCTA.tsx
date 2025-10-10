@@ -114,14 +114,14 @@ export default function ConnectCTA() {
                     Whether you are new to the faith, or ready to lead, our door is open to you. We invite you to come join us in our homes—experience the simple
                     church and the family of God as we follow Jesus together!
                   </p>
-                  <a
+                  <Link
 		  href="https://docs.google.com/forms/d/e/1FAIpQLSdxI1RRwUXxrjCYMZbyBOI1eoLQBL_m90qR22awXHpeDsihQQ/viewform?usp=dialog"
 		  target="_blank"
 		  rel="noopener noreferrer"                    
 		  className="mt-6 inline-block rounded-2xl bg-white px-5 py-2 font-semibold text-mariner transition-colors hover:bg-jaguar hover:text-white"
                   >
                     Get Connected
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

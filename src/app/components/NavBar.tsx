@@ -21,7 +21,7 @@ export default function NavBar() {
       ].join(" ")}
     >
       <nav className="mx-auto max-w-6xl px-4 py-0 flex items-center justify-between">
-        <a href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2">
           <Image
             src={scrolled ? "/riseShortLogo.png" : "/riseStartLogo.png"}
             alt="RISE Discipleship Network"
@@ -30,7 +30,7 @@ export default function NavBar() {
             className="transition-opacity duration-500"
             priority
           />
-        </a>
+        </Link>
         <div className="flex items-center gap-6">
 	{/*  This is commented for the sake for the mvp
 
