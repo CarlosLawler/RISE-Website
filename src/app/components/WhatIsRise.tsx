@@ -44,7 +44,7 @@ export default function WhatIsRise() {
           <div className="order-1 md:order-2 flex items-center justify-center">
             <div className="relative">
               <Image
-                src="/whatIsRISE.jpg"
+                src="/whatIsRise.JPG"
                 alt="People reading the Bible together"
                 width={560}
                 height={360}
