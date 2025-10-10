@@ -31,8 +31,9 @@ export default function NavBar() {
             priority
           />
         </a>
-
         <div className="flex items-center gap-6">
+	{/*  This is commented for the sake for the mvp
+
           {["Home", "About", "Give"].map((item) => (
             <a
               key={item}
@@ -45,9 +46,11 @@ export default function NavBar() {
               {item}
             </a>
           ))}
-
-          <a
-            href="/connect"
+	--*/}
+	<a
+	  href="https://docs.google.com/forms/d/e/1FAIpQLSdxI1RRwUXxrjCYMZbyBOI1eoLQBL_m90qR22awXHpeDsihQQ/viewform?usp=dialog"
+	  target="_blank"
+	  rel="noopener noreferrer" 
             className={[
               "rounded-xl px-3 py-1.5 text-sm font-semibold transition-all duration-500",
               scrolled

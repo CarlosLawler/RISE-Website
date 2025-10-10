@@ -5,25 +5,25 @@ const items = [
     icon: BookOpen,
     title: "ABIDE",
     body:
-      "Practicing the presence of Jesus in prayer, Scripture, and rhythms of grace.",
+      "Sitting with Jesus, learning from Him, and obeying Him.",
   },
   {
     icon: Flame,
     title: "IGNITE",
     body:
-      "Everyday mission in neighborhoods, campuses, and workplaces.",
+      "Empowering God's people through discipleship to use their gifts and to lead others to Jesus.",
   },
   {
     icon: Users,
     title: "MULTIPLY",
     body:
-      "Disciples who make disciples; simple churches that reproduce.",
+      "Disciples who make Disciples. Simple churches that reproduce.",
   },
 ];
 
 export default function Values() {
   return (
-    <section id="values" className="bg-gradient-to-b from-gallery to-portage">
+    <section id="values" className="bg-gradient-to-r from-gallery via-portage from-gallery">
       <div className="mx-auto max-w-6xl px-4 py-16 grid gap-10 md:grid-cols-3">
         {items.map(({ icon: Icon, title, body }) => (
           <div

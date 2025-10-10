@@ -21,7 +21,7 @@ export default function Hero() {
                 WELCOME HOME
                 </h1>
                 <p className="mt-2 text-sm md:text-base text-jaguar/80">
-                This is church, reimagined as living rooms and city blocks.
+                A House Church Movement. Following Jesus. Empowering Servants. Making Disciples.
                 </p>
             </div>
         </div>
