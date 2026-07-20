@@ -48,6 +48,15 @@ export default function NavBar() {
             </a>
           ))}
 	--*/}
+  <Link
+	  href="/about"
+            className={[
+              "text-sm font-semibold transition-all duration-500",
+              scrolled ? "text-white" : "text-white/95",
+            ].join(" ")}
+          >
+            About
+          </Link>
 	 <a
 	  href="https://docs.google.com/forms/d/e/1FAIpQLSdxI1RRwUXxrjCYMZbyBOI1eoLQBL_m90qR22awXHpeDsihQQ/viewform?usp=dialog"
 	  target="_blank"
