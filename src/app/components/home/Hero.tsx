@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function Hero() {
+export default function HomeHero() {
   return (
     <section className="relative h-[72vh] min-h-[560px] w-full">
       {/* Background image */}

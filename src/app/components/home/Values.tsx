@@ -21,7 +21,7 @@ const items = [
   },
 ];
 
-export default function Values() {
+export default function HomeValues() {
   return (
     <section id="values" className="bg-gradient-to-r from-gallery via-portage from-gallery">
       <div className="mx-auto max-w-6xl px-4 py-16 grid gap-10 md:grid-cols-3">

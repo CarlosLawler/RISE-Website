@@ -3,7 +3,7 @@
 import { useEffect, useCallback, useState } from "react";
 import Image from "next/image";
 
-export default function WhatIsRise() {
+export default function HomeWhatIsRise() {
   const [open, setOpen] = useState(false);
 
   // Close on ESC

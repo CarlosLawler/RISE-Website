@@ -1,12 +1,12 @@
 import NavBar from "../components/layout/NavBar";
-import AboutHero from "../components/about/Hero.tsx";
+import IFrame from "../components/layout/IFrame.tsx";
 import Footer from "../components/layout/Footer";
 
-export default function About() {
+export default function Give() {
    return (
     <main className="bg-wildsand text-jaguar">
       <NavBar />
-      <AboutHero/>
+      <IFrame /* link = "" desc = "" *//>
       <Footer />
     </main>
   );

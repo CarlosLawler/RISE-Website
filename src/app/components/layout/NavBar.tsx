@@ -61,9 +61,7 @@ export default function NavBar() {
             Give
           </Link>
           <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSdxI1RRwUXxrjCYMZbyBOI1eoLQBL_m90qR22awXHpeDsihQQ/viewform?usp=dialog"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/join"
             className={[
               "rounded-xl px-3 py-1.5 text-sm font-semibold transition-all duration-500",
               scrolled

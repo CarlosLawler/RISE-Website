@@ -73,7 +73,7 @@ const bubbles: Bubble[] = [
 },
 ];
 
-export default function ConnectCTA() {
+export default function HomeConnectCTA() {
   return (
     <section className="relative overflow-hidden bg-[url('/fabric_plaid.png')] bg-repeat">
       <div className="relative mx-auto max-w-[1280px] px-4 py-16 sm:py-20 md:py-24 min-h-[60svh]">
