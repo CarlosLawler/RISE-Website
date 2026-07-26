@@ -1,6 +1,6 @@
-import NavBar from "../components/layout/NavBar";
+import NavBar from "../components/layout/NavBar.tsx";
 import IFrame from "../components/layout/IFrame.tsx";
-import Footer from "../components/layout/Footer";
+import Footer from "../components/layout/Footer.tsx";
 
 export default function Give() {
    return (
