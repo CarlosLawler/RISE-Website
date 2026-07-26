@@ -33,22 +33,16 @@ export default function NavBar() {
           />
         </Link>
         <div className="flex items-center gap-6">
-	{/*  This is commented for the sake for the mvp
-
-          {["Home", "About", "Give"].map((item) => (
-            <a
-              key={item}
-              href={item === "Home" ? "/" : `/#${item.toLowerCase()}`}
-              className={[
-                "text-sm font-medium transition-opacity duration-500",
-                scrolled ? "opacity-100" : "opacity-50 text-jaguar hover:opacity-100",
-              ].join(" ")}
-            >
-              {item}
-            </a>
-          ))}
-	--*/}
   <Link
+	  href="/"
+            className={[
+              "text-sm font-semibold transition-all duration-500",
+              scrolled ? "text-white" : "text-white/95",
+            ].join(" ")}
+          >
+            Home
+          </Link>
+<Link
 	  href="/about"
             className={[
               "text-sm font-semibold transition-all duration-500",
@@ -56,6 +50,15 @@ export default function NavBar() {
             ].join(" ")}
           >
             About
+          </Link>
+<Link
+	  href="/give"
+            className={[
+              "text-sm font-semibold transition-all duration-500",
+              scrolled ? "text-white" : "text-white/95",
+            ].join(" ")}
+          >
+            Give
           </Link>
 	 <a
 	  href="https://docs.google.com/forms/d/e/1FAIpQLSdxI1RRwUXxrjCYMZbyBOI1eoLQBL_m90qR22awXHpeDsihQQ/viewform?usp=dialog"
