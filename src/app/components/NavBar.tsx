@@ -26,15 +26,15 @@ export default function NavBar() {
           <Image
             src={scrolled ? "/riseShortLogo.png" : "/riseStartLogo.png"}
             alt="RISE Discipleship Network"
-            width={scrolled ? 140:220}
-            height={scrolled ? 28:44}
+            width={scrolled ? 140 : 220}
+            height={scrolled ? 28 : 44}
             className="transition-opacity duration-500"
             priority
           />
         </Link>
         <div className="flex items-center gap-6">
-  <Link
-	  href="/"
+          <Link
+            href="/"
             className={[
               "text-sm font-semibold transition-all duration-500",
               scrolled ? "text-white" : "text-white/95",
@@ -42,8 +42,8 @@ export default function NavBar() {
           >
             Home
           </Link>
-<Link
-	  href="/about"
+          <Link
+            href="/about"
             className={[
               "text-sm font-semibold transition-all duration-500",
               scrolled ? "text-white" : "text-white/95",
@@ -51,8 +51,8 @@ export default function NavBar() {
           >
             About
           </Link>
-<Link
-	  href="/give"
+          <Link
+            href="/give"
             className={[
               "text-sm font-semibold transition-all duration-500",
               scrolled ? "text-white" : "text-white/95",
@@ -60,10 +60,10 @@ export default function NavBar() {
           >
             Give
           </Link>
-	 <a
-	  href="https://docs.google.com/forms/d/e/1FAIpQLSdxI1RRwUXxrjCYMZbyBOI1eoLQBL_m90qR22awXHpeDsihQQ/viewform?usp=dialog"
-	  target="_blank"
-	  rel="noopener noreferrer" 
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSdxI1RRwUXxrjCYMZbyBOI1eoLQBL_m90qR22awXHpeDsihQQ/viewform?usp=dialog"
+            target="_blank"
+            rel="noopener noreferrer"
             className={[
               "rounded-xl px-3 py-1.5 text-sm font-semibold transition-all duration-500",
               scrolled
