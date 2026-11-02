@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import type { Photo } from "../../data/aboutPhotos.ts";
+import type { Photo } from "../../data/aboutPhotos";
 
 type PhotoMarqueeProps = {
   images: Photo[];

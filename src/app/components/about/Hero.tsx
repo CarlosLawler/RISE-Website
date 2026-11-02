@@ -1,5 +1,5 @@
-import PhotoMarquee from "./PhotoMarquee.tsx";
-import { topRow, bottomRow } from "../../data/aboutPhotos.ts";
+import PhotoMarquee from "./PhotoMarquee";
+import { topRow, bottomRow } from "../../data/aboutPhotos";
 
 export default function AboutHero() {
   return (
