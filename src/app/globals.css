@@ -25,6 +25,37 @@
   --font-body: var(--font-barlow);
 }
 
+/* Rolling photo rows (About page) */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Speed is set per tile so every row moves at the same rate (~20px/s).
+   Seconds per tile = tile width incl. margin / speed: 280px/20 = 14s, 344px/20 = 17.2s */
+.marquee-track {
+  animation-name: marquee;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: calc(var(--marquee-tiles) * 14s);
+}
+
+@media (min-width: 640px) {
+  .marquee-track {
+    animation-duration: calc(var(--marquee-tiles) * 17.2s);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
 /* Subtle scrollbar styling */
 ::-webkit-scrollbar {
   width: 8px;
