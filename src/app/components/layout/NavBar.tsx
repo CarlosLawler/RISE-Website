@@ -3,6 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
+const linkClass = "text-sm font-semibold text-white";
+
 export default function NavBar() {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -13,61 +15,40 @@ export default function NavBar() {
   }, []);
 
   return (
-    <div
-      className={[
-        "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-        scrolled
-          ? "translate-y-0 bg-biscay/90 text-white backdrop-blur supports-[backdrop-filter]:bg-biscay/80 shadow-lg"
-          : "-translate-y-4 text-white/95",
-      ].join(" ")}
-    >
-      <nav className="mx-auto max-w-6xl px-4 py-0 flex items-center justify-between">
+    <div className="fixed inset-x-0 top-0 z-50 bg-biscay/90 text-white shadow-lg backdrop-blur supports-[backdrop-filter]:bg-biscay/80">
+      <nav
+        className={[
+          "mx-auto max-w-6xl px-4 flex items-center justify-between transition-all duration-500",
+          // Taller at the top of the page, compact once scrolled
+          scrolled ? "py-0" : "py-4",
+        ].join(" ")}
+      >
         <Link href="/" className="flex items-center gap-2">
-          <Image
-            src={scrolled ? "/riseShortLogo.png" : "/riseStartLogo.png"}
-            alt="RISE Discipleship Network"
-            width={scrolled ? 140 : 220}
-            height={scrolled ? 28 : 44}
-            className="transition-opacity duration-500"
-            priority
-          />
+          {scrolled ? (
+            <Image src="/riseShortLogo.png" alt="RISE Discipleship Network" width={140} height={28} priority />
+          ) : (
+            <span className="block font-display text-lg font-bold uppercase leading-[0.95]">
+              RISE
+              <br />
+              Discipleship
+              <br />
+              Network
+            </span>
+          )}
         </Link>
         <div className="flex items-center gap-6">
-          <Link
-            href="/"
-            className={[
-              "text-sm font-semibold transition-all duration-500",
-              scrolled ? "text-white" : "text-white/95",
-            ].join(" ")}
-          >
+          <Link href="/" className={linkClass}>
             Home
           </Link>
-          <Link
-            href="/about"
-            className={[
-              "text-sm font-semibold transition-all duration-500",
-              scrolled ? "text-white" : "text-white/95",
-            ].join(" ")}
-          >
+          <Link href="/about" className={linkClass}>
             About
           </Link>
-          <Link
-            href="/give"
-            className={[
-              "text-sm font-semibold transition-all duration-500",
-              scrolled ? "text-white" : "text-white/95",
-            ].join(" ")}
-          >
+          <Link href="/give" className={linkClass}>
             Give
           </Link>
           <a
             href="/join"
-            className={[
-              "rounded-xl px-3 py-1.5 text-sm font-semibold transition-all duration-500",
-              scrolled
-                ? "bg-white text-biscay hover:opacity-90 shadow"
-                : "bg-white/90 text-biscay hover:bg-white",
-            ].join(" ")}
+            className="rounded-xl bg-white px-3 py-1.5 text-sm font-semibold text-biscay shadow hover:opacity-90"
           >
             Join Us
           </a>
