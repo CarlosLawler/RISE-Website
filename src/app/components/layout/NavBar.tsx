@@ -15,7 +15,13 @@ export default function NavBar() {
   }, []);
 
   return (
-    <div className="fixed inset-x-0 top-0 z-50 bg-biscay/90 text-white shadow-lg backdrop-blur supports-[backdrop-filter]:bg-biscay/80">
+    <div
+      className={[
+        "fixed inset-x-0 top-0 z-50 text-white shadow-lg backdrop-blur transition-colors duration-500",
+        // More solid at the top of the page, slightly see-through once scrolled
+        scrolled ? "bg-biscay/90 supports-[backdrop-filter]:bg-biscay/80" : "bg-biscay/[0.97]",
+      ].join(" ")}
+    >
       <nav
         className={[
           "mx-auto max-w-6xl px-4 flex items-center justify-between transition-all duration-500",
