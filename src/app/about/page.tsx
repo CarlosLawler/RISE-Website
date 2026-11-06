@@ -2,7 +2,7 @@ import NavBar from "../components/layout/NavBar";
 import AboutHero from "../components/about/Hero";
 import Footer from "../components/layout/Footer";
 import DisciplesOfJesus from "../components/about/DisciplesOfJesus";
-import AboutHouses from "../components/about/AboutHouses";
+import StatementsOfFaith from "../components/about/StatementsOfFaith";
 import AboutFAQ from "../components/about/AboutFAQ";
 
 
@@ -12,7 +12,7 @@ export default function About() {
       <NavBar />
       <AboutHero/>
       <DisciplesOfJesus />
-      <AboutHouses />
+      <StatementsOfFaith />
       <AboutFAQ />
       <Footer />
     </main>
