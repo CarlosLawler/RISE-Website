@@ -2,51 +2,10 @@
 
 import Image from "next/image";
 import { Clock3, MapPin, Users } from "lucide-react";
+import { houseChurches, type HouseChurch } from "../../data/houseChurches";
 
 // Uncomment these when you activate the automatic carousel.
 // import { useEffect, useState } from "react";
-
-export type HouseChurch = {
-  id: string;
-  name: string;
-  day: string;
-  area: string;
-  time: string;
-  location: string;
-  audience: string;
-  imageSrc: string;
-  imageAlt: string;
-};
-
-const houseChurches: HouseChurch[] = [
-  {
-    id: "ostermeyer-home",
-    name: "The Ostermeyer’s Home",
-    day: "Sundays",
-    area: "Bethel Rd, Columbus",
-    time: "10:00 PM",
-    location: "Near Bethel Rd.",
-    audience: "All Ages",
-    imageSrc: "/riseConnect1.JPG",
-    imageAlt: "The Ostermeyer home in Columbus, Ohio",
-  },
-
-  /*
-   * Add future house churches here:
-   *
-   * {
-   *   id: "another-house-church",
-   *   name: "Another House Church",
-   *   day: "Wednesdays",
-   *   area: "Dublin, Ohio",
-   *   time: "7:00 PM",
-   *   location: "Near Downtown Dublin",
-   *   audience: "All Ages",
-   *   imageSrc: "/images/another-house.jpg",
-   *   imageAlt: "The home where the Dublin house church gathers",
-   * },
-   */
-];
 
 type HouseChurchCardProps = {
   church: HouseChurch;
@@ -146,12 +105,12 @@ export default function HouseChurches() {
         <HouseChurchCard church={currentChurch} />
 
         <div className="mt-7 flex justify-center">
-          <button
-            type="button"
+          <a
+            href="#connect"
             className="rounded-full bg-biscay px-10 py-3 font-display font-semibold text-white shadow-md transition-colors hover:bg-mariner focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mariner focus-visible:ring-offset-4"
           >
             Want More Details?
-          </button>
+          </a>
         </div>
       </div>
     </section>

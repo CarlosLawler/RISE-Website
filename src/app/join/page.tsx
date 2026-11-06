@@ -1,5 +1,6 @@
 import NavBar from "../components/layout/NavBar";
-import IFrame from "../components/layout/IFrame";
+import HowItWorks from "../components/join/HowItWorks";
+import ConnectForm from "../components/join/ConnectForm";
 import Footer from "../components/layout/Footer";
 import JoinUsHero from "../components/join/JoinUsHero";
 import WhatToExpect from "../components/join/WhatToExpect";
@@ -7,12 +8,13 @@ import Churches from "../components/join/Churches";
 
 export default function Join() {
    return (
-    <main className="bg-wildsand text-jaguar">
+    <main className="bg-wildsand bg-[url('/fabric_plaid.png')] bg-repeat text-jaguar">
       <NavBar />
       <JoinUsHero/>
       <WhatToExpect/>
       <Churches/>
-      <IFrame link = "https://docs.google.com/forms/d/e/1FAIpQLSdxI1RRwUXxrjCYMZbyBOI1eoLQBL_m90qR22awXHpeDsihQQ/viewform?usp=dialog" desc = "Rise Gooogle Form"/>
+      <HowItWorks />
+      <ConnectForm />
       <Footer />
     </main>
   );

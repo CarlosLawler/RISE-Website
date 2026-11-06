@@ -51,7 +51,7 @@ export default function WhatToExpect() {
   return (
     <section
       aria-labelledby="what-to-expect-heading"
-      className="bg-white px-5 py-16 font-body text-biscay sm:px-8 sm:py-20 lg:px-12 lg:py-24"
+      className="px-5 py-16 font-body text-biscay sm:px-8 sm:py-20 lg:px-12 lg:py-24"
     >
       <div className="mx-auto max-w-7xl">
         <div className="max-w-2xl">
