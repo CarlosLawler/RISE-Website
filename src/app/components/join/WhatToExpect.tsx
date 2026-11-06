@@ -50,8 +50,9 @@ const expectations: Expectation[] = [
 export default function WhatToExpect() {
   return (
     <section
+      id="what-to-expect"
       aria-labelledby="what-to-expect-heading"
-      className="px-5 py-16 font-body text-biscay sm:px-8 sm:py-20 lg:px-12 lg:py-24"
+      className="scroll-mt-24 px-5 py-16 font-body text-biscay sm:px-8 sm:py-20 lg:px-12 lg:py-24"
     >
       <div className="mx-auto max-w-7xl">
         <div className="max-w-2xl">
