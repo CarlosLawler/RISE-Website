@@ -8,7 +8,7 @@ const faqs = [
     a: "We gather as a church in homes. We're one church made up of many household gatherings that live out faith together.",
   },
   {
-    q: "Why homes?",
+    q: "Why meet in homes?",
     a: "Homes create a context for authentic relationships, shared life, and practical discipleship that is hard to replicate in a larger building.",
   },
   {
@@ -24,31 +24,30 @@ const faqs = [
     a: "Leaders are disciples who serve their homes. Teaching is biblical and aimed at helping people follow Jesus in everyday life.",
   },
   {
-    q: "What happens at a gathering?",
-    a: "Gatherings include worship, stories of life and faith, practical teaching, and times to connect in smaller groups.",
+    q: "What about kids ministry?",
+    a: "Kids are a welcome part of our gatherings. We see families as central to discipleship, so children take part in worship alongside adults. Then, we provide age-appropriate teaching and activities for children during the main gathering.",
   },
 ];
 
 export default function AboutFAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(3);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
     <section className="py-12">
       <div className="mx-auto max-w-6xl px-6">
-        <h2 className="mb-6 text-2xl font-extrabold">FAQ</h2>
-
-        <div className="rounded-2xl bg-[#d8e3ff] p-6 lg:p-8">
+        <div className="rounded-2xl bg-[#5f7ed7] p-6 lg:p-8">
+          <h2 className="mb-6 text-2xl font-extrabold text-white">Frequently Asked Questions</h2>
           <div className="space-y-4">
             {faqs.map((item, i) => {
               const open = i === openIndex;
               return (
                 <div key={i} className="">
                   <div
-                    className={`w-full overflow-hidden transition-all ${open ? "rounded-2xl shadow-inner" : "rounded-full shadow-md"} bg-[#5f7ed7]`}
+                    className={`w-full overflow-hidden transition-all ${open ? "rounded-2xl shadow-inner" : "rounded-full shadow-md"} bg-[#d8e3ff]`}
                   >
                     <button
                       onClick={() => setOpenIndex(open ? -1 : i)}
-                      className="w-full px-6 py-4 text-left text-white flex items-center justify-between"
+                      className="w-full px-6 py-4 text-left text-biscay flex items-center justify-between"
                       aria-expanded={open}
                     >
                       <span className="text-sm font-semibold">{item.q}</span>
@@ -63,7 +62,7 @@ export default function AboutFAQ() {
                     </button>
 
                     <div className={`transition-[max-height] overflow-hidden ${open ? "max-h-40" : "max-h-0"}`}>
-                      <div className="border-t border-white/30 px-6 py-4 text-sm text-white/95">
+                      <div className="border-t border-biscay/15 px-6 py-4 text-sm text-biscay/85">
                         {item.a}
                       </div>
                     </div>
