@@ -20,7 +20,7 @@ export default function AboutHouses() {
 	}
 
 	return (
-		<section className="bg-wildsand py-12">
+		<section className="py-12">
 			<div className="mx-auto max-w-6xl px-6">
 				<div className="relative flex flex-col-reverse items-center gap-10 lg:flex-row lg:items-start">
 					{/* Left: houses and connectors */}
