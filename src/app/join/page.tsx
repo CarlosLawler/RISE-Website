@@ -1,9 +1,9 @@
-import NavBar from "../components/layout/NavBar.tsx";
-import IFrame from "../components/layout/IFrame.tsx";
-import Footer from "../components/layout/Footer.tsx";
-import JoinUsHero from "../components/join/JoinUsHero.tsx"
-import WhatToExpect from "../components/join/WhatToExpect.tsx"
-import Churches from "../components/join/Churches.tsx"
+import NavBar from "../components/layout/NavBar";
+import IFrame from "../components/layout/IFrame";
+import Footer from "../components/layout/Footer";
+import JoinUsHero from "../components/join/JoinUsHero";
+import WhatToExpect from "../components/join/WhatToExpect";
+import Churches from "../components/join/Churches";
 
 export default function Join() {
    return (
