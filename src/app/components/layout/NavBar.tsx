@@ -27,7 +27,7 @@ export default function NavBar() {
           {scrolled ? (
             <Image src="/riseShortLogo.png" alt="RISE Discipleship Network" width={140} height={28} priority />
           ) : (
-            <span className="block font-display text-lg font-bold uppercase leading-[0.95]">
+            <span className="block font-display text-2xl font-bold uppercase leading-[0.95]">
               RISE
               <br />
               Discipleship
