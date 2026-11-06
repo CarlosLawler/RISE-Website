@@ -8,7 +8,7 @@ import AboutFAQ from "../components/about/AboutFAQ";
 
 export default function About() {
    return (
-    <main className="bg-wildsand text-jaguar">
+    <main className="bg-wildsand bg-[url('/fabric_plaid.png')] bg-repeat text-jaguar">
       <NavBar />
       <AboutHero/>
       <DisciplesOfJesus />
