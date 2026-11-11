@@ -6,7 +6,7 @@ export default function Join() {
    return (
     <main className="bg-wildsand text-jaguar">
       <NavBar />
-      <IFrame link = "https://docs.google.com/forms/d/e/1FAIpQLSdxI1RRwUXxrjCYMZbyBOI1eoLQBL_m90qR22awXHpeDsihQQ/viewform?usp=dialog" desc = "Rise Gooogle Form"/>
+      <IFrame link = "https://docs.google.com/forms/d/e/1FAIpQLSdxI1RRwUXxrjCYMZbyBOI1eoLQBL_m90qR22awXHpeDsihQQ/viewform?usp=dialog" desc = "Rise Google Form"/>
       <Footer />
     </main>
   );
