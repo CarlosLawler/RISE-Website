@@ -2,6 +2,7 @@
 
 import { useEffect, useCallback, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function HomeWhatIsRise() {
   const [open, setOpen] = useState(false);
@@ -22,35 +23,48 @@ export default function HomeWhatIsRise() {
 
   return (
     <>
-      {/* Section (unchanged hero for “What is RISE?”) */}
-      <section id="about" className="relative bg-[url('/fabric_plaid.png')] bg-cover bg-center">
-        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-16 md:grid-cols-2">
-          <div className="order-2 content-center md:order-1">
-            <h2 className="text-3xl md:text-4xl font-semibold text-jaguar">What is RISE?</h2>
-            <p className="mt-3 text-jaguar/80">
-              We are a network of simple, reproducible house churches with the focus of being disciples of Jesus who
-              make disciples of Jesus. Our heart is to train all people to be with Jesus, discover their role in God&apos;s
-              story, to make disciples, and to plant the church in their home.
+      {/* On tablet/desktop the navy background shape is drawn by the wrapper in app/page.tsx */}
+      <section
+        id="about"
+        aria-labelledby="what-is-rise-heading"
+        className="relative rounded-br-[100%_4rem] bg-biscay md:rounded-none md:bg-transparent"
+      >
+        <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-5 pb-28 pt-16 sm:px-8 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] md:gap-12 md:pb-36 md:pt-24 lg:gap-16">
+          {/* Text first on every screen size, so phones read the heading before the photo */}
+          <div className="font-body text-white">
+            <h2
+              id="what-is-rise-heading"
+              className="font-display text-4xl font-bold tracking-tight sm:text-5xl"
+            >
+              What is RISE?
+            </h2>
+            <p className="mt-4 text-lg font-semibold leading-snug sm:text-xl">
+              Not just another church – a movement of disciple-making community.
+            </p>
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-gallery/90 sm:text-base">
+              RISE is a network of Spirit-led house churches meeting in living rooms – where faith feels personal, not
+              performative. Instead of weekly spectatorship, we gather like family: sharing meals, studying Scripture,
+              praying, and growing in real relationship. It&apos;s a simpler, deeper way of being the Church – one built
+              on constant fellowship.
             </p>
             <button
               type="button"
               onClick={() => setOpen(true)}
-              className="mt-6 inline-block rounded-xl bg-jaguar px-4 py-2 text-white transition-colors hover:bg-biscay"
+              aria-haspopup="dialog"
+              className="mt-8 inline-block rounded-xl bg-white px-8 py-3 font-semibold text-biscay shadow transition-colors hover:bg-gallery focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
             >
               Learn More
             </button>
           </div>
 
-          <div className="order-1 md:order-2 flex items-center justify-center">
-            <div className="relative">
-              <Image
-                src="/whatIsRise.JPG"
-                alt="People reading the Bible together"
-                width={560}
-                height={360}
-                className="relative rounded-[28px] border border-white/70 shadow-2xl"
-              />
-            </div>
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-2xl">
+            <Image
+              src="/whatIsRise.JPG"
+              alt="People gathered in a home, talking and reading the Bible together"
+              fill
+              sizes="(min-width: 768px) 55vw, 100vw"
+              className="object-cover"
+            />
           </div>
         </div>
       </section>
@@ -209,14 +223,12 @@ export default function HomeWhatIsRise() {
 
               {/* Actions */}
               <div className="mt-6 flex flex-wrap items-center gap-3">
-	         <a
-		  href="https://docs.google.com/forms/d/e/1FAIpQLSdxI1RRwUXxrjCYMZbyBOI1eoLQBL_m90qR22awXHpeDsihQQ/viewform?usp=dialog"
-		  target="_blank"
-		  rel="noopener noreferrer"
+                <Link
+                  href="/join"
                   className="rounded-xl bg-jaguar px-4 py-2 text-white transition-colors hover:bg-biscay"
                 >
                   Get Connected
-                </a>
+                </Link>
                 <button
                   className="rounded-xl border border-jaguar/20 bg-white/60 px-4 py-2 text-jaguar hover:bg-white/80 transition"
                   onClick={() => setOpen(false)}
