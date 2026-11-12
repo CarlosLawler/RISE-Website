@@ -4,7 +4,7 @@ import { useActionState, type ReactNode } from "react";
 import { CheckCircle2, Lock } from "lucide-react";
 import { submitConnectForm, type ConnectFormState } from "../../join/actions";
 import { connectOptions } from "../../data/connectForm";
-import { houseChurches } from "../../data/houseChurches";
+import { houseChurches } from "../../data/gatherings";
 
 // Fallback if submitting through the site fails
 const GOOGLE_FORM_LINK =

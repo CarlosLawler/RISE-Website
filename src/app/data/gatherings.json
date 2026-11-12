@@ -1,0 +1,32 @@
+{
+  "houseChurches": [
+    {
+      "id": "bethel-road",
+      "name": "Bethel Road House Church",
+      "host": "Hosted by the Ostermeyer family",
+      "day": "Sundays",
+      "time": "Time to be confirmed",
+      "area": "Bethel Rd, Columbus",
+      "location": "Near Bethel Road, Columbus",
+      "audience": "All ages welcome",
+      "imageSrc": "/riseConnect1.JPG",
+      "imageAlt": "People gathered in a living room for the Bethel Road house church"
+    }
+  ],
+  "huddles": [
+    {
+      "id": "carlos-aidan",
+      "name": "Carlos and Aidan's Huddle",
+      "day": "Fridays",
+      "time": "7:00 PM",
+      "audience": "Men's group",
+      "neighborhood": "University District",
+      "zip": "43201",
+      "approxLat": 39.998,
+      "approxLng": -83.007,
+      "radiusMeters": 1200,
+      "imageSrc": "/riseConnect3.JPG",
+      "imageAlt": "A group reading the Bible together in a living room"
+    }
+  ]
+}
