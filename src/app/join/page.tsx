@@ -1,12 +1,24 @@
 import NavBar from "../components/layout/NavBar";
-import IFrame from "../components/layout/IFrame";
+import HowItWorks from "../components/join/HowItWorks";
+import ConnectForm from "../components/join/ConnectForm";
 import Footer from "../components/layout/Footer";
+import JoinUsHero from "../components/join/JoinUsHero";
+import WhatToExpect from "../components/join/WhatToExpect";
+import Churches from "../components/join/Churches";
+import { getConnectFormChoices } from "./connectFormChoices";
 
-export default function Join() {
+export default async function Join() {
+  // Dropdown options come from data/joinPage.ts, checked against the live Google Form
+  const connectChoices = await getConnectFormChoices();
+
    return (
-    <main className="bg-wildsand text-jaguar">
+    <main className="bg-wildsand bg-[url('/fabric_plaid.png')] bg-repeat text-jaguar">
       <NavBar />
-      <IFrame link = "https://docs.google.com/forms/d/e/1FAIpQLSdxI1RRwUXxrjCYMZbyBOI1eoLQBL_m90qR22awXHpeDsihQQ/viewform?usp=dialog" desc = "Rise Gooogle Form"/>
+      <JoinUsHero/>
+      <WhatToExpect/>
+      <Churches/>
+      <HowItWorks />
+      <ConnectForm choices={connectChoices} />
       <Footer />
     </main>
   );

@@ -42,3 +42,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# MapLibre web worker, copied from node_modules on install (see package.json postinstall)
+/public/maplibre-gl-worker.mjs
