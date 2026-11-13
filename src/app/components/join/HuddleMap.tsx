@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Expand, Minus, Plus } from "lucide-react";
 import * as maplibregl from "maplibre-gl";
 import type { StyleSpecification } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -22,6 +23,7 @@ const STYLE_URL = "https://tiles.openfreemap.org/styles/positron";
 maplibregl.setWorkerUrl(`/maplibre-gl-worker.mjs?v=${maplibregl.getVersion()}`);
 
 const COLUMBUS: [number, number] = [-82.9988, 39.9612]; // [lng, lat]
+const MIN_ZOOM = 9;
 const MAX_ZOOM = 14; // capped so nobody can zoom down to street level
 
 // Site palette (globals.css)
@@ -94,6 +96,24 @@ function circlePolygon(h: Huddle) {
 const escapeHtml = (text: string) =>
   text.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 
+/** Frames the given huddles (their whole approximate circles) in view. */
+function fitHuddles(map: maplibregl.Map, targets: Huddle[], maxZoom: number) {
+  if (targets.length === 0) {
+    map.flyTo({ center: COLUMBUS, zoom: 11, duration: 600 });
+    return;
+  }
+  const bounds = new maplibregl.LngLatBounds();
+  for (const h of targets) {
+    const { dLat, dLng } = offsets(h.approxLat, radiusOf(h) * 1.3);
+    bounds.extend([h.approxLng - dLng, h.approxLat - dLat]);
+    bounds.extend([h.approxLng + dLng, h.approxLat + dLat]);
+  }
+  map.fitBounds(bounds, { padding: 48, maxZoom, duration: 600 });
+}
+
+const controlButton =
+  "flex size-11 items-center justify-center text-biscay transition-colors hover:bg-wildsand hover:text-mariner focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-mariner disabled:cursor-not-allowed disabled:text-silver disabled:hover:bg-white";
+
 function pinElement(h: NumberedHuddle) {
   const el = document.createElement("button");
   el.type = "button";
@@ -121,6 +141,7 @@ export default function HuddleMap({ huddles, selectedId, onSelect }: HuddleMapPr
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const [ready, setReady] = useState(false);
+  const [zoom, setZoom] = useState(11);
 
   // Create the map once
   useEffect(() => {
@@ -136,16 +157,18 @@ export default function HuddleMap({ huddles, selectedId, onSelect }: HuddleMapPr
           style: brandStyle(style),
           center: COLUMBUS,
           zoom: 11,
-          minZoom: 9,
+          minZoom: MIN_ZOOM,
           maxZoom: MAX_ZOOM,
-          scrollZoom: false, // don't hijack page scrolling
+          // Ctrl/⌘ + scroll to zoom on desktop, two fingers to pan on phones,
+          // so the map never traps normal page scrolling. Shows a hint when needed.
+          cooperativeGestures: true,
           dragRotate: false,
           pitchWithRotate: false,
           touchPitch: false,
           attributionControl: { compact: true },
         });
         map.touchZoomRotate.disableRotation();
-        map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
+        map.on("zoom", () => setZoom(map!.getZoom()));
 
         map.on("load", () => {
           map!.addSource("area", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
@@ -202,19 +225,52 @@ export default function HuddleMap({ huddles, selectedId, onSelect }: HuddleMapPr
       );
     }
 
-    const targets = selected ? [selected] : huddles;
-    if (targets.length > 0) {
-      const bounds = new maplibregl.LngLatBounds();
-      for (const h of targets) {
-        const { dLat, dLng } = offsets(h.approxLat, radiusOf(h) * 1.3);
-        bounds.extend([h.approxLng - dLng, h.approxLat - dLat]);
-        bounds.extend([h.approxLng + dLng, h.approxLat + dLat]);
-      }
-      map.fitBounds(bounds, { padding: 40, maxZoom: 13, duration: 600 });
-    }
+    fitHuddles(map, selected ? [selected] : huddles, 13);
 
     return () => markers.forEach((m) => m.remove());
   }, [ready, huddles, selectedId, onSelect]);
 
-  return <div ref={containerRef} className="h-full w-full" />;
+  const showAll = useCallback(() => {
+    if (mapRef.current) fitHuddles(mapRef.current, huddles, 11);
+  }, [huddles]);
+
+  return (
+    <div className="relative h-full w-full">
+      <div ref={containerRef} className="h-full w-full" />
+
+      {/* Zoom controls */}
+      <div className="absolute right-3 top-3 z-10 flex flex-col overflow-hidden rounded-xl bg-white shadow-md ring-1 ring-jaguar/10">
+        <button
+          type="button"
+          aria-label="Zoom in"
+          title="Zoom in"
+          disabled={!ready || zoom >= MAX_ZOOM - 0.01}
+          onClick={() => mapRef.current?.zoomIn()}
+          className={controlButton}
+        >
+          <Plus aria-hidden="true" className="size-5" strokeWidth={2.25} />
+        </button>
+        <button
+          type="button"
+          aria-label="Zoom out"
+          title="Zoom out"
+          disabled={!ready || zoom <= MIN_ZOOM + 0.01}
+          onClick={() => mapRef.current?.zoomOut()}
+          className={`${controlButton} border-y border-gallery`}
+        >
+          <Minus aria-hidden="true" className="size-5" strokeWidth={2.25} />
+        </button>
+        <button
+          type="button"
+          aria-label="Show all huddles"
+          title="Show all huddles"
+          disabled={!ready}
+          onClick={showAll}
+          className={controlButton}
+        >
+          <Expand aria-hidden="true" className="size-5" strokeWidth={2} />
+        </button>
+      </div>
+    </div>
+  );
 }
