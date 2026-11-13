@@ -1,24 +1,13 @@
 "use server";
 
-import { connectOptions } from "../data/connectForm";
+import { googleForm } from "../data/joinPage";
+import { GOOGLE_FORM_SUBMIT_URL, getConnectFormChoices } from "./connectFormChoices";
 
-// The "RISE Interest Form" Google Form. Responses keep landing there as before.
-const GOOGLE_FORM_URL =
-  "https://docs.google.com/forms/d/e/1FAIpQLSdxI1RRwUXxrjCYMZbyBOI1eoLQBL_m90qR22awXHpeDsihQQ/formResponse";
-
-// Google Form question IDs (from the form's "Get pre-filled link").
-// If a question is added or changed in the Google Form, update its ID here.
-const ENTRY = {
-  name: "entry.430848516", // First and Last Name (required)
-  email: "entry.269646513", // Email
-  phone: "entry.418979054", // Phone Number (required)
-  connectHow: "entry.1452349888", // How would you like to connect? (required)
-  message: "entry.604408557", // Anything else you'd like to share?
-  // TODO: add the location question's ID once it exists in the Google Form
-};
+const ENTRY = googleForm.questions;
 
 export type ConnectFormState = { status: "idle" | "success" | "error"; message?: string };
 
+// Sends the Join page form to the "RISE Interest Form" Google Form, where responses are collected.
 export async function submitConnectForm(
   _prev: ConnectFormState,
   formData: FormData,
@@ -29,6 +18,9 @@ export async function submitConnectForm(
   const lastName = field("lastName");
   const email = field("email");
   const phone = field("phone");
+  const interest = field("interest");
+  const gathering = field("gathering");
+  const huddle = field("huddle");
   const connectHow = field("connectHow");
   const message = field("message");
 
@@ -36,8 +28,20 @@ export async function submitConnectForm(
   if (!firstName || !lastName || !email || !phone || !connectHow) {
     return { status: "error", message: "Please fill in all required fields." };
   }
-  if (!(connectOptions as readonly string[]).includes(connectHow)) {
-    return { status: "error", message: "Please choose how you’d like to connect." };
+
+  // Google rejects the whole submission if a choice isn't one of the form's current options
+  const choices = await getConnectFormChoices();
+  const isValid = (value: string, options: string[]) => !value || options.includes(value);
+  if (
+    !isValid(interest, choices.interest) ||
+    !isValid(gathering, choices.gathering) ||
+    !isValid(huddle, choices.huddle) ||
+    !isValid(connectHow, choices.connectHow)
+  ) {
+    return {
+      status: "error",
+      message: "Our form options were just updated. Please refresh the page and try again.",
+    };
   }
 
   const body = new URLSearchParams({
@@ -47,9 +51,13 @@ export async function submitConnectForm(
     [ENTRY.connectHow]: connectHow,
     [ENTRY.message]: message,
   });
+  // Optional questions are left out entirely when unanswered
+  if (interest) body.set(ENTRY.interest, interest);
+  if (gathering) body.set(ENTRY.gathering, gathering);
+  if (huddle) body.set(ENTRY.huddle, huddle);
 
   try {
-    const res = await fetch(GOOGLE_FORM_URL, {
+    const res = await fetch(GOOGLE_FORM_SUBMIT_URL, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body,

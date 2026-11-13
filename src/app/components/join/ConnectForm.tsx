@@ -1,22 +1,45 @@
 "use client";
 
-import { useActionState, type ReactNode } from "react";
+import { useActionState, useEffect, useState, type ReactNode } from "react";
 import { CheckCircle2, Lock } from "lucide-react";
 import { submitConnectForm, type ConnectFormState } from "../../join/actions";
-import { connectOptions } from "../../data/connectForm";
-import { houseChurches } from "../../data/houseChurches";
-
-// Fallback if submitting through the site fails
-const GOOGLE_FORM_LINK =
-  "https://docs.google.com/forms/d/e/1FAIpQLSdxI1RRwUXxrjCYMZbyBOI1eoLQBL_m90qR22awXHpeDsihQQ/viewform";
+import { GOOGLE_FORM_LINK, type ConnectFormChoices } from "../../join/connectFormChoices";
+import { interestOptions } from "../../data/joinPage";
+import { onConnectPrefill } from "./connectPrefill";
 
 const inputClass =
   "w-full rounded-md border border-jaguar/15 bg-white px-3 py-2 text-sm text-jaguar outline-none transition placeholder:text-jaguar/40 focus:border-mariner focus:ring-2 focus:ring-mariner/20";
 
 const initialState: ConnectFormState = { status: "idle" };
 
-export default function ConnectForm() {
+// `choices` are the dropdown options: written in data/joinPage.ts and checked against
+// the live Google Form by the Join page
+export default function ConnectForm({ choices }: { choices: ConnectFormChoices }) {
   const [state, formAction, pending] = useActionState(submitConnectForm, initialState);
+
+  // These three can be pre-filled by the connect buttons on the gathering and huddle cards
+  const [interest, setInterest] = useState("");
+  const [gathering, setGathering] = useState("");
+  const [huddle, setHuddle] = useState("");
+
+  useEffect(
+    () =>
+      onConnectPrefill(({ kind, option }) => {
+        // Only select things that are real options in the Google Form; otherwise leave blank
+        const pick = (options: string[], wanted: string) => (options.includes(wanted) ? wanted : "");
+
+        if (kind === "gathering") {
+          setInterest(pick(choices.interest, interestOptions.gatherings));
+          setGathering(pick(choices.gathering, option));
+          setHuddle("");
+        } else {
+          setInterest(pick(choices.interest, interestOptions.huddles));
+          setHuddle(pick(choices.huddle, option));
+          setGathering("");
+        }
+      }),
+    [choices],
+  );
 
   return (
     <section
@@ -57,30 +80,35 @@ export default function ConnectForm() {
                   <input name="phone" type="tel" required autoComplete="tel" placeholder="(614) 555-1234" className={inputClass} />
                 </Field>
 
-                {/* Left column: two dropdowns, beside a message box that spans both rows */}
+                {/* Left column: dropdowns, beside a message box that spans the same height */}
                 <div className="flex flex-col gap-4">
-                  <Field label="Preferred Area / Gathering">
-                    {/* Not sent to Google yet: there's only one location, so the Google Form has no question for it */}
-                    <select name="area" defaultValue={houseChurches[0]?.area} className={inputClass}>
-                      {houseChurches.map((c) => (
-                        <option key={c.id} value={c.area}>
-                          {c.area}
-                        </option>
-                      ))}
-                    </select>
-                  </Field>
-                  <Field label="How would you like to connect?" required>
-                    <select name="connectHow" required defaultValue="" className={inputClass}>
-                      <option value="" disabled>
-                        Choose an option
-                      </option>
-                      {connectOptions.map((o) => (
-                        <option key={o} value={o}>
-                          {o}
-                        </option>
-                      ))}
-                    </select>
-                  </Field>
+                  <ChoiceField
+                    label="What are you interested in?"
+                    name="interest"
+                    options={choices.interest}
+                    value={interest}
+                    onChange={setInterest}
+                  />
+                  <ChoiceField
+                    label="Which Gathering?"
+                    name="gathering"
+                    options={choices.gathering}
+                    value={gathering}
+                    onChange={setGathering}
+                  />
+                  <ChoiceField
+                    label="Which Huddle?"
+                    name="huddle"
+                    options={choices.huddle}
+                    value={huddle}
+                    onChange={setHuddle}
+                  />
+                  <ChoiceField
+                    label="How would you like to connect?"
+                    name="connectHow"
+                    options={choices.connectHow}
+                    required
+                  />
                 </div>
                 <Field label="Message / Questions">
                   <textarea
@@ -131,5 +159,48 @@ function Field({ label, required, children }: { label: string; required?: boolea
       </span>
       {children}
     </label>
+  );
+}
+
+// A dropdown for one of the Google Form's multiple-choice questions.
+// Hidden when the question has no options; optional ones can be left as "Not sure yet".
+// Pass `value` + `onChange` to control it from outside (used for pre-filling).
+function ChoiceField({
+  label,
+  name,
+  options,
+  required,
+  value,
+  onChange,
+}: {
+  label: string;
+  name: string;
+  options: string[];
+  required?: boolean;
+  value?: string;
+  onChange?: (value: string) => void;
+}) {
+  // Controlled when a value is passed in, otherwise the browser keeps track of it
+  const selection = value === undefined ? { defaultValue: "" } : { value };
+  if (options.length === 0) return null;
+  return (
+    <Field label={label} required={required}>
+      <select
+        name={name}
+        required={required}
+        {...selection}
+        onChange={onChange && ((e) => onChange(e.target.value))}
+        className={inputClass}
+      >
+        <option value="" disabled={required}>
+          {required ? "Choose an option" : "Not sure yet"}
+        </option>
+        {options.map((o) => (
+          <option key={o} value={o}>
+            {o}
+          </option>
+        ))}
+      </select>
+    </Field>
   );
 }
