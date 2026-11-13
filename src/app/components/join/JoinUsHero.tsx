@@ -31,11 +31,12 @@ export default function JoinUsHero() {
                 Find a Gathering
               </Link>
 
+              {/* Churches.tsx opens its Discipleship Huddles tab for links to #huddles */}
               <Link
-                href="#what-to-expect"
+                href="#huddles"
                 className="font-semibold text-white underline decoration-white/50 underline-offset-4 transition-colors hover:text-portage focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
               >
-                What to Expect
+                Find a Huddle
               </Link>
             </div>
           </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import {
   ArrowLeft,
@@ -43,6 +43,13 @@ const tabs: Tab[] = [
     icon: UsersRound,
   },
 ];
+
+// Links elsewhere on the page can open a specific tab by pointing at these anchors,
+// e.g. the hero's "Find a Gathering" (#gatherings) and "Find a Huddle" (#huddles).
+const tabForHash: Record<string, TabId> = {
+  "#gatherings": "house-churches",
+  "#huddles": "huddles",
+};
 
 const buttonClass =
   "inline-flex items-center justify-center rounded-lg bg-white font-display font-bold text-jaguar shadow-sm transition-colors hover:bg-gallery focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-portage focus-visible:ring-offset-2 focus-visible:ring-offset-biscay";
@@ -179,13 +186,42 @@ export default function Churches() {
   const otherTab = tabs.find((t) => t.id !== activeId)!;
   const activeIndex = tabs.indexOf(activeTab);
 
+  // Open the matching tab when the page is opened at /join#huddles, or when a link to
+  // #huddles / #gatherings is clicked. The browser does the scrolling itself.
+  // (Clicks are watched directly because clicking the same link twice doesn't change
+  // the address, so there'd be no "hashchange" to react to the second time.)
+  useEffect(() => {
+    const openTabFor = (hash: string) => {
+      const tab = tabForHash[hash];
+      if (tab) setActiveId(tab);
+    };
+
+    openTabFor(window.location.hash);
+
+    const onClick = (event: MouseEvent) => {
+      const link = (event.target as Element | null)?.closest?.("a[href]");
+      if (link instanceof HTMLAnchorElement && link.pathname === window.location.pathname) {
+        openTabFor(link.hash);
+      }
+    };
+    const onHashChange = () => openTabFor(window.location.hash);
+
+    document.addEventListener("click", onClick);
+    window.addEventListener("hashchange", onHashChange);
+    return () => {
+      document.removeEventListener("click", onClick);
+      window.removeEventListener("hashchange", onHashChange);
+    };
+  }, []);
+
   return (
     <section
       id="gatherings"
       aria-labelledby="gatherings-heading"
       className="w-full scroll-mt-24 px-5 py-16 font-body sm:px-8 lg:px-12"
     >
-      <div className="mx-auto max-w-6xl">
+      {/* id="huddles" is the scroll target for "Find a Huddle" links (same spot as the section top) */}
+      <div id="huddles" className="mx-auto max-w-6xl scroll-mt-40">
         <SectionHeading id="gatherings-heading" size="lg">
           Find Your Community
         </SectionHeading>
