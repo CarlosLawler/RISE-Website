@@ -12,9 +12,10 @@ import {
   UsersRound,
   type LucideIcon,
 } from "lucide-react";
-import { houseChurches, type Gathering } from "../../data/gatherings";
+import { houseChurches, type Gathering } from "../../data/joinPage";
 import HuddleFinder from "./HuddleFinder";
 import EmptyState from "./EmptyState";
+import { prefillConnectForm } from "./connectPrefill";
 
 type TabId = "house-churches" | "huddles";
 
@@ -125,7 +126,11 @@ function FeaturedGatheringCard({ gathering }: { gathering: Gathering }) {
 
         <GatheringDetails gathering={gathering} />
 
-        <a href="#connect" className={`${buttonClass} mt-2 px-6 py-3 text-lg`}>
+        <a
+          href="#connect"
+          onClick={() => prefillConnectForm({ kind: "gathering", option: gathering.formOption })}
+          className={`${buttonClass} mt-2 px-6 py-3 text-lg`}
+        >
           Connect With This Gathering
         </a>
       </div>
@@ -155,7 +160,11 @@ function GatheringCard({ gathering }: { gathering: Gathering }) {
 
         <GatheringDetails gathering={gathering} compact />
 
-        <a href="#connect" className={`${buttonClass} mt-auto px-3 py-2 text-xs sm:py-2.5 sm:text-sm`}>
+        <a
+          href="#connect"
+          onClick={() => prefillConnectForm({ kind: "gathering", option: gathering.formOption })}
+          className={`${buttonClass} mt-auto px-3 py-2 text-xs sm:py-2.5 sm:text-sm`}
+        >
           <span className="sm:hidden">Connect</span>
           <span className="hidden sm:inline">Connect With This Gathering</span>
         </a>

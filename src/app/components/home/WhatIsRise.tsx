@@ -2,6 +2,7 @@
 
 import { useEffect, useCallback, useState } from "react";
 import Image from "next/image";
+import { googleForm } from "../../data/joinPage";
 
 export default function HomeWhatIsRise() {
   const [open, setOpen] = useState(false);
@@ -210,7 +211,7 @@ export default function HomeWhatIsRise() {
               {/* Actions */}
               <div className="mt-6 flex flex-wrap items-center gap-3">
 	         <a
-		  href="https://docs.google.com/forms/d/e/1FAIpQLSdxI1RRwUXxrjCYMZbyBOI1eoLQBL_m90qR22awXHpeDsihQQ/viewform?usp=dialog"
+		  href={`${googleForm.baseUrl}/viewform`}
 		  target="_blank"
 		  rel="noopener noreferrer"
                   className="rounded-xl bg-jaguar px-4 py-2 text-white transition-colors hover:bg-biscay"

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { googleForm } from "../../data/joinPage";
 
 type Bubble = {
   src: string;
@@ -115,7 +116,7 @@ export default function HomeConnectCTA() {
                     church and the family of God as we follow Jesus together!
                   </p>
                   <a
-		  href="https://docs.google.com/forms/d/e/1FAIpQLSdxI1RRwUXxrjCYMZbyBOI1eoLQBL_m90qR22awXHpeDsihQQ/viewform?usp=dialog"
+		  href={`${googleForm.baseUrl}/viewform`}
 		  target="_blank"
 		  rel="noopener noreferrer"                    
 		  className="mt-6 inline-block rounded-2xl bg-white px-5 py-2 font-semibold text-mariner transition-colors hover:bg-jaguar hover:text-white"

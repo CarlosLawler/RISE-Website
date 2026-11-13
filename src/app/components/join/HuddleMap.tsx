@@ -5,7 +5,7 @@ import { Expand, Minus, Plus } from "lucide-react";
 import * as maplibregl from "maplibre-gl";
 import type { StyleSpecification } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { DEFAULT_HUDDLE_RADIUS_METERS, type Huddle } from "../../data/gatherings";
+import { DEFAULT_HUDDLE_RADIUS_METERS, type Huddle } from "../../data/joinPage";
 
 type NumberedHuddle = Huddle & { number: number };
 

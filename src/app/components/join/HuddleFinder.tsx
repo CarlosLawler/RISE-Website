@@ -4,8 +4,9 @@ import { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { CalendarDays, ChevronDown, Search, Users } from "lucide-react";
-import { huddles } from "../../data/gatherings";
+import { huddles } from "../../data/joinPage";
 import EmptyState from "./EmptyState";
+import { prefillConnectForm } from "./connectPrefill";
 
 // Leaflet touches `window`, so the map only renders in the browser.
 const HuddleMap = dynamic(() => import("./HuddleMap"), {
@@ -13,7 +14,7 @@ const HuddleMap = dynamic(() => import("./HuddleMap"), {
   loading: () => <div className="h-full w-full animate-pulse bg-gallery" />,
 });
 
-// Numbers stay tied to each huddle's position in gatherings.json, even when filtered.
+// Numbers stay tied to each huddle's position in data/joinPage.ts, even when filtered.
 const numbered = huddles.map((huddle, i) => ({ ...huddle, number: i + 1 }));
 const days = Array.from(new Set(huddles.map((h) => h.day)));
 
@@ -143,6 +144,7 @@ export default function HuddleFinder() {
 
                       <a
                         href="#connect"
+                        onClick={() => prefillConnectForm({ kind: "huddle", option: h.formOption })}
                         className="mt-auto inline-flex items-center justify-center rounded-lg bg-white px-3 py-1.5 font-display text-sm font-bold text-jaguar transition-colors hover:bg-gallery focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-portage sm:py-2 sm:text-base"
                       >
                         Ask About This Huddle
