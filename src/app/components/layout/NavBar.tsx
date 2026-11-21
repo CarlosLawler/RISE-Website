@@ -29,11 +29,28 @@ export default function NavBar() {
           scrolled ? "py-0" : "py-4",
         ].join(" ")}
       >
-        <Link href="/" className="flex items-center gap-2">
+        {/* aria-label names the link on phones, where only the emblem shows */}
+        <Link href="/" aria-label="RISE Discipleship Network home" className="flex shrink-0 items-center gap-2">
+          {/* Emblem stays put and shrinks with the bar. The PNG has ~10% transparent padding around
+              the circle, so the negative margin pulls it in to line up with the title. */}
+          <Image
+            src="/NewEmblem.png"
+            alt=""
+            width={1254}
+            height={1254}
+            sizes="84px"
+            priority
+            className={[
+              // max-w-none: the negative margin narrows the link, and the default max-width:100% would squash the circle
+              "w-auto max-w-none shrink-0 transition-all duration-500",
+              scrolled ? "-m-1 h-11" : "-m-2 h-16 sm:h-[5.25rem]",
+            ].join(" ")}
+          />
+          {/* Phones have no room for the title next to the nav links, so the emblem stands alone there */}
           {scrolled ? (
-            <Image src="/riseShortLogo.png" alt="RISE Discipleship Network" width={140} height={28} priority />
+            <Image src="/riseShortLogo.png" alt="" width={140} height={28} priority className="hidden sm:block" />
           ) : (
-            <span className="block font-display text-2xl font-bold uppercase leading-[0.95]">
+            <span className="hidden sm:block font-display text-2xl font-bold uppercase leading-[0.95]">
               RISE
               <br />
               Discipleship
@@ -42,7 +59,7 @@ export default function NavBar() {
             </span>
           )}
         </Link>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4 sm:gap-6">
           <Link href="/" className={linkClass}>
             Home
           </Link>
@@ -59,7 +76,7 @@ export default function NavBar() {
           </a>
           <a
             href="/join"
-            className="rounded-xl bg-white px-3 py-1.5 text-sm font-semibold text-biscay shadow hover:opacity-90"
+            className="whitespace-nowrap rounded-xl bg-white px-3 py-1.5 text-sm font-semibold text-biscay shadow hover:opacity-90"
           >
             Join Us
           </a>
