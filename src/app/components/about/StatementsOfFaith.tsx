@@ -26,7 +26,7 @@ export default function StatementsOfFaith() {
     <section className="py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <h2 className="text-4xl font-extrabold leading-tight text-biscay md:text-5xl lg:text-[3.5rem]">
-          Statements of Faith<span className="text-mariner">.</span>
+          Statements of Faith
         </h2>
         <p className="mt-3 text-lg text-jaguar/75">
           The beliefs that ground our community and guide how we follow Jesus together.
