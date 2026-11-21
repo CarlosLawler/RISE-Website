@@ -102,3 +102,10 @@ body {
     animation: none;
   }
 }
+
+/* Smooth in-page scrolling is set on <html> in layout.tsx; turn it off for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

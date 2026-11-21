@@ -49,9 +49,14 @@ export default function NavBar() {
           <Link href="/about" className={linkClass}>
             About
           </Link>
-          <Link href="/give" className={linkClass}>
+          <a
+            href="https://risedn.churchcenter.com/giving"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={linkClass}
+          >
             Give
-          </Link>
+          </a>
           <a
             href="/join"
             className="rounded-xl bg-white px-3 py-1.5 text-sm font-semibold text-biscay shadow hover:opacity-90"
