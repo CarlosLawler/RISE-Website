@@ -17,7 +17,7 @@ export default function StatementsOfFaithPage() {
 
       <div className="mx-auto max-w-7xl px-6 pb-24 pt-36 md:pt-40">
         <Link
-          href="/about"
+          href="/about#statements-of-faith"
           className="inline-flex items-center gap-2 text-sm font-semibold text-mariner hover:text-biscay"
         >
           <ArrowLeft className="h-4 w-4" /> Back to About
@@ -68,7 +68,7 @@ export default function StatementsOfFaithPage() {
             {/* Larger back button for readers who reach the end of the list */}
             <div className="pt-4">
               <Link
-                href="/about"
+                href="/about#statements-of-faith"
                 className="group inline-flex items-center gap-3 rounded-xl bg-biscay px-6 py-3.5 text-base font-semibold text-white shadow-md transition-colors hover:bg-mariner focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mariner"
               >
                 <ArrowLeft className="h-5 w-5 transition-transform group-hover:-translate-x-1" />
