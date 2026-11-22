@@ -24,7 +24,9 @@ export default function StatementsOfFaith() {
   }
 
   return (
-    <section className="py-20 lg:py-28">
+    // id lets the "Back to About" links on the all-statements page return here instead of the page top.
+    // scroll-mt leaves room for the fixed nav bar.
+    <section id="statements-of-faith" className="scroll-mt-6 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <h2 className="text-4xl font-extrabold leading-tight text-biscay md:text-5xl lg:text-[3.5rem]">
           Statements of Faith
