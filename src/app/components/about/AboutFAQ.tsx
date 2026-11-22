@@ -69,7 +69,8 @@ export default function AboutFAQ() {
                         onClick={() => setOpenIndex(open ? null : i)}
                         aria-expanded={open}
                         aria-controls={panelId}
-                        className="flex w-full items-center justify-between gap-4 rounded-lg px-3 py-4 text-left text-biscay focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mariner sm:px-4"
+                        // Hover/keyboard focus fades in a light tint (lighter than the open row's, so "open" still stands out)
+                        className="group flex w-full cursor-pointer items-center justify-between gap-4 rounded-lg px-3 py-4 text-left text-biscay transition-colors duration-200 hover:bg-portage/20 focus-visible:bg-portage/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mariner sm:px-4"
                       >
                         {/* Fixed-width number column keeps every question (and wrapped lines) aligned */}
                         <span className="flex font-display text-lg font-bold sm:text-xl">
@@ -78,7 +79,7 @@ export default function AboutFAQ() {
                         </span>
                         <span
                           aria-hidden
-                          className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 border-biscay transition-colors ${motion} ${open ? "bg-biscay text-white" : "bg-transparent text-biscay"}`}
+                          className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 border-biscay transition-colors ${motion} ${open ? "bg-biscay text-white" : "bg-transparent text-biscay group-hover:bg-biscay/10 group-focus-visible:bg-biscay/10"}`}
                         >
                           <svg
                             className={`h-4 w-4 transition-transform ${motion} ${open ? "rotate-180" : "rotate-0"}`}
