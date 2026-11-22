@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useRef, useState, type KeyboardEvent } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { statementNumber, statementsOfFaith } from "../../data/statementsOfFaith";
 
 const total = statementsOfFaith.length;
@@ -12,6 +12,7 @@ export default function StatementsOfFaith() {
 
   const statement = statementsOfFaith[selected];
   const nextIndex = (selected + 1) % total;
+  const prevIndex = (selected - 1 + total) % total; // wraps from the first statement to the last
 
   // Up/Down arrows move through the list, like a menu
   function onListKeyDown(e: KeyboardEvent<HTMLUListElement>) {
@@ -26,7 +27,7 @@ export default function StatementsOfFaith() {
     <section className="py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <h2 className="text-4xl font-extrabold leading-tight text-biscay md:text-5xl lg:text-[3.5rem]">
-          Statements of Faith<span className="text-mariner">.</span>
+          Statements of Faith
         </h2>
         <p className="mt-3 text-lg text-jaguar/75">
           The beliefs that ground our community and guide how we follow Jesus together.
@@ -112,11 +113,23 @@ export default function StatementsOfFaith() {
                 <div className="absolute left-8 top-4 h-12 w-12 rounded-xl bg-biscay/90" />
               </div>
 
-              <div className="mt-6 flex justify-end border-t border-jaguar/10 pt-4">
+              {/* Back on the left, Next on the right; they stack on narrow screens if the titles don't fit */}
+              <div className="mt-6 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-jaguar/10 pt-4">
+                <button
+                  type="button"
+                  onClick={() => setSelected(prevIndex)}
+                  className="group flex items-center gap-2 text-left text-sm text-jaguar/60 hover:text-biscay"
+                >
+                  <ArrowLeft className="h-4 w-4 shrink-0 text-mariner transition-transform group-hover:-translate-x-0.5" />
+                  Back:
+                  <span className="font-semibold text-mariner">
+                    {statementsOfFaith[prevIndex].title}
+                  </span>
+                </button>
                 <button
                   type="button"
                   onClick={() => setSelected(nextIndex)}
-                  className="group flex items-center gap-2 text-sm text-jaguar/60 hover:text-biscay"
+                  className="group ml-auto flex items-center gap-2 text-right text-sm text-jaguar/60 hover:text-biscay"
                 >
                   Next:
                   <span className="font-semibold text-mariner">

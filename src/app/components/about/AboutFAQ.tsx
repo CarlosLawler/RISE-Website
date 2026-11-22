@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useId, useState } from "react";
 
 const faqs = [
   {
@@ -29,52 +29,108 @@ const faqs = [
   },
 ];
 
+// Shared timing so the row tint, arrow, and answer all move together
+const motion = "duration-300 ease-out motion-reduce:transition-none";
+
 export default function AboutFAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const baseId = useId();
 
   return (
     <section className="py-12">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="rounded-2xl bg-[#5f7ed7] p-6 lg:p-8">
-          <h2 className="mb-6 text-2xl font-extrabold text-white">Frequently Asked Questions</h2>
-          <div className="space-y-4">
+      <div className="relative mx-auto max-w-4xl px-6">
+        {/* Decorative circle peeking out from behind the card's top-right corner */}
+        <div
+          aria-hidden
+          className="absolute -top-10 right-0 h-40 w-40 rounded-full bg-portage sm:-top-12 sm:h-56 sm:w-56"
+        />
+
+        <div className="relative rounded-3xl bg-white px-5 py-8 shadow-lg sm:px-8 sm:py-10">
+          <div className="mb-6 flex items-center justify-between gap-4 sm:mb-8">
+            <h2 className="font-display text-3xl font-extrabold tracking-tight text-biscay sm:text-5xl">
+              Frequently Asked Questions
+            </h2>
+            <ChatBubbleIcon />
+          </div>
+
+          <ul className="border-t border-gallery">
             {faqs.map((item, i) => {
               const open = i === openIndex;
-              return (
-                <div key={i} className="">
-                  <div
-                    className={`w-full overflow-hidden transition-all ${open ? "rounded-2xl shadow-inner" : "rounded-full shadow-md"} bg-[#d8e3ff]`}
-                  >
-                    <button
-                      onClick={() => setOpenIndex(open ? -1 : i)}
-                      className="w-full px-6 py-4 text-left text-biscay flex items-center justify-between"
-                      aria-expanded={open}
-                    >
-                      <span className="text-sm font-semibold">{item.q}</span>
-                      <svg
-                        className={`h-5 w-5 transform transition-transform ${open ? "rotate-180" : "rotate-0"}`}
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                      >
-                        <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </button>
+              const buttonId = `${baseId}-q${i}`;
+              const panelId = `${baseId}-a${i}`;
 
-                    <div className={`transition-[max-height] overflow-hidden ${open ? "max-h-40" : "max-h-0"}`}>
-                      <div className="border-t border-biscay/15 px-6 py-4 text-sm text-biscay/85">
-                        {item.a}
+              return (
+                <li key={i} className="border-b border-gallery">
+                  <div className={`rounded-lg transition-colors ${motion} ${open ? "bg-portage/25" : "bg-transparent"}`}>
+                    <h3>
+                      <button
+                        id={buttonId}
+                        type="button"
+                        onClick={() => setOpenIndex(open ? null : i)}
+                        aria-expanded={open}
+                        aria-controls={panelId}
+                        // Hover/keyboard focus fades in a light tint (lighter than the open row's, so "open" still stands out)
+                        className="group flex w-full cursor-pointer items-center justify-between gap-4 rounded-lg px-3 py-4 text-left text-biscay transition-colors duration-200 hover:bg-portage/20 focus-visible:bg-portage/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mariner sm:px-4"
+                      >
+                        {/* Fixed-width number column keeps every question (and wrapped lines) aligned */}
+                        <span className="flex font-display text-lg font-bold sm:text-xl">
+                          <span className="w-7 shrink-0 tabular-nums">{i + 1}</span>
+                          <span>{item.q}</span>
+                        </span>
+                        <span
+                          aria-hidden
+                          className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 border-biscay transition-colors ${motion} ${open ? "bg-biscay text-white" : "bg-transparent text-biscay group-hover:bg-biscay/10 group-focus-visible:bg-biscay/10"}`}
+                        >
+                          <svg
+                            className={`h-4 w-4 transition-transform ${motion} ${open ? "rotate-180" : "rotate-0"}`}
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                          >
+                            <path strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" d="M6 9l6 6 6-6" />
+                          </svg>
+                        </span>
+                      </button>
+                    </h3>
+
+                    {/* Animating grid rows 0fr -> 1fr slides the answer open to its natural height, however long it is */}
+                    <div
+                      id={panelId}
+                      role="region"
+                      aria-labelledby={buttonId}
+                      inert={!open}
+                      className={`grid transition-[grid-template-rows,opacity] ${motion} ${open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+                    >
+                      <div className="overflow-hidden">
+                        {/* Left padding = row padding + number column, so the answer lines up with the question */}
+                        <p className="pb-4 pl-10 pr-3 font-body text-base text-jaguar/80 sm:pl-11 sm:pr-4 sm:text-lg">{item.a}</p>
                       </div>
                     </div>
                   </div>
-
-                  <div className="mt-4" />
-                </div>
+                </li>
               );
             })}
-          </div>
+          </ul>
         </div>
       </div>
     </section>
+  );
+}
+
+function ChatBubbleIcon() {
+  return (
+    <svg aria-hidden viewBox="0 0 64 56" className="h-12 w-14 shrink-0 text-portage sm:h-14 sm:w-16" fill="none">
+      <path
+        d="M32 4C16.5 4 5 13.4 5 25c0 6.3 3.4 11.9 8.8 15.8L11 52l12.6-6.6c2.7.6 5.5.9 8.4.9 15.5 0 27-9.4 27-21.3S47.5 4 32 4z"
+        stroke="currentColor"
+        strokeWidth="3.5"
+        strokeLinejoin="round"
+        fill="currentColor"
+        fillOpacity="0.2"
+      />
+      <circle cx="21" cy="25" r="3.5" fill="currentColor" />
+      <circle cx="32" cy="25" r="3.5" fill="currentColor" />
+      <circle cx="43" cy="25" r="3.5" fill="currentColor" />
+    </svg>
   );
 }

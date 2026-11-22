@@ -64,6 +64,17 @@ export default function StatementsOfFaithPage() {
                 <p className="mt-5 max-w-3xl text-lg leading-8 text-jaguar/80">{s.body}</p>
               </article>
             ))}
+
+            {/* Larger back button for readers who reach the end of the list */}
+            <div className="pt-4">
+              <Link
+                href="/about"
+                className="group inline-flex items-center gap-3 rounded-xl bg-biscay px-6 py-3.5 text-base font-semibold text-white shadow-md transition-colors hover:bg-mariner focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mariner"
+              >
+                <ArrowLeft className="h-5 w-5 transition-transform group-hover:-translate-x-1" />
+                Back to About
+              </Link>
+            </div>
           </div>
         </div>
       </div>
